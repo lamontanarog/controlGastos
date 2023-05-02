@@ -6,19 +6,18 @@ import Transaction from "./components/transaction"
 import {useState} from "react"
 
 function App() {
-//   const [transactions, setTransactions] = useState([])
+  const [transactions, setTransactions] = useState([])
 
-//   const addTransaction = (transaction) => {
-//     setTransactions([...transactions, transaction]);
-// }
-var transactions = []
+  const addTransaction = (transaction) => {
+    setTransactions([...transactions, transaction]);
+}
   return (
     <>
     <Header/>
     <Balance/>
     <BalanceDetail/>
     <History transactions={transactions}/>
-    <Transaction transactions={transactions}/>
+    <Transaction addTransaction={addTransaction}/>
     </>
   )
 }

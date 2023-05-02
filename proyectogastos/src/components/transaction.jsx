@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 
 
 function Transaction(props) {
-    const {transactions} = props;
     const [text, setText] = useState("");
     const [cost, setCost] = useState(0);
     
@@ -14,8 +13,7 @@ function Transaction(props) {
 
     function pusheoArray() {
         const newTransaction = { texto: text, costo: cost };
-        debugger
-            transactions.push(newTransaction);
+            props.addTransaction(newTransaction);
     }
     
 
