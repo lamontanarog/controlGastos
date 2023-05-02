@@ -2,7 +2,7 @@ import React from 'react'
 
 function Header() {
   return (
-    <h1>Expense tracker</h1>
+    <h1 className='father'>Expense tracker</h1>
   )
 }
 

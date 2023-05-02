@@ -1,18 +1,21 @@
 import { useState } from 'react'
 import History from './history'
+import '../components/styles.css'
+import { useEffect } from 'react';
 
 
-function Transaction() {
-
+function Transaction(props) {
+    const {transactions} = props;
     const [text, setText] = useState("");
     const [cost, setCost] = useState(0);
-    const [transaction, setTransaction] = useState([])
-
     
+    useEffect(() =>{
+    },[])
 
     function pusheoArray() {
-        const newTransaction = [...transaction, { texto: text, costo: cost }];
-        setTransaction(newTransaction);
+        const newTransaction = { texto: text, costo: cost };
+        debugger
+            transactions.push(newTransaction);
     }
     
 
@@ -20,7 +23,6 @@ function Transaction() {
     return (
         <>
         
-    <History transaction={transaction} />
             <h1>Add new transaction</h1>
 
             <form>
