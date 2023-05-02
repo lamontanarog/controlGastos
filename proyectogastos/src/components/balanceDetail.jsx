@@ -4,46 +4,56 @@ import '../components/styles.css'
 
 function BalanceDetail(props) {
 
-    // const { income, expense } = props
+    const { incomes, expenses } = props
 
-    // function recorrerIncome() {
-    //     {
-    //         income.length > 0 && (
-    //             <div>
-    //                 Ingresos:
-    //                 <ul>
-    //                     {income.map((item, index) => (
-    //                         <li key={index}>${item}</li>
-    //                     ))}
-    //                 </ul>
-    //             </div>
-    //         )
-    //     }
-    // }
+    console.log("income", incomes)
+    console.log("Expense", expenses)
 
-    // function recorrerExpense() {
-    //     {
-    //         expense.length > 0 && (
-    //             <div>
-    //                 Gastos:
-    //                 <ul>
-    //                     {expense.map((item, index) => (
-    //                         <li key={index}>-${Math.abs(item)}</li>
-    //                     ))}
-    //                 </ul>
-    //             </div>
-    //         )
-    //     }
-    // }
+    const totalIncome = incomes.map(Number).reduce((acc, curr) => acc + curr, 0);
+    const totalExpense = expenses.map(Number).reduce((acc, curr) => acc + curr, 0);
+
+    function RecorrerIncomes() {
+        {
+            incomes.length > 0 && (
+                <div>
+                    Ingresos:
+                    <ul>
+                        {incomes.map((item, index) => (
+                            <li key={index}>${item}</li>
+                        ))}
+                    </ul>
+                </div>
+            )
+        }
+    }
+
+    function RecorrerExpenses() {
+        {
+            expenses.length > 0 && (
+                <div>
+                    Gastos:
+                    <ul>
+                        {expenses.map((item, index) => (
+                            <li key={index}>-${Math.abs(item)}</li>
+                        ))}
+                    </ul>
+                </div>
+            )
+        }
+    }
+    console.log("incomes", incomes)
+    console.log("Expenses", expenses)
     return (
         <>
             <div className='father'>
-                <h3>Income</h3>
-                {/* <p>{recorrerIncome}</p> */}
+                <h3>incomes</h3>
+                <RecorrerIncomes />
+                <h3>Total: ${totalIncome}</h3>
             </div>
             <div className='father'>
-                <h3>expense</h3>
-                {/* <p>{recorrerExpense}</p> */}
+                <h3>expenses</h3>
+                <RecorrerExpenses />
+                <h3>Total: ${totalExpense}</h3>
             </div>
         </>
     )

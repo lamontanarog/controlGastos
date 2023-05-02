@@ -24,12 +24,10 @@ function HistoryItem(props) {
     }
   }, [costoGasto])
 
-  console.log("income",income,"expense",expense)
-
   return (
-    
-        <div>en: {nombreGasto}  <span> {signo} ${Math.abs(costoGasto)}  </span> </div>
-      /* <BalanceDetail income={income} expense={expense} /> */
+    <>
+      <div>en: {nombreGasto}  <span> {signo} ${Math.abs(costoGasto)}  </span> </div>
+    </>
   )
 }
 
