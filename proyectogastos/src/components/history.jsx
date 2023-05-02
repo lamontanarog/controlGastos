@@ -1,13 +1,18 @@
-import React from 'react'
-import HistoryItem from './historyItem'
+import React from 'react';
+import HistoryItem from './historyItem';
 
-function History() {
+function History({transaction}) {
+
   return (
-      <>
-    <h3>Historial de transacciones</h3>
-    <HistoryItem/>
+    <>
+      <h3>Historial de transacciones</h3>
+      <ul>
+        {transaction && transaction.map((transaccion, index) => (
+          <HistoryItem key={index} nombreGasto={transaccion.texto} costoGasto={transaccion.costo} />
+        ))}
+      </ul>
     </>
-  )
+  );
 }
 
-export default History
+export default History;
