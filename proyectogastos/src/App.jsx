@@ -19,11 +19,16 @@ function App() {
     }
 }
 
+const totalIncome = incomes.map(Number).reduce((acc, curr) => acc + curr, 0);
+const totalExpense = expenses.map(Number).reduce((acc, curr) => acc + curr, 0);
+
+const totalBalance = parseFloat(totalIncome - totalExpense);
+
   return (
     <>
     <Header/>
-    <Balance/>
-    <BalanceDetail incomes={incomes} expenses={expenses}/>
+    <Balance totalBalance={totalBalance} />
+    <BalanceDetail totalIncome={totalIncome} totalExpense={totalExpense}/>
     <History transactions={transactions}/>
     <Transaction addTransaction={addTransaction}/>
     </>
