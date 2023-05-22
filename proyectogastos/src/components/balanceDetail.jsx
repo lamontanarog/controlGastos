@@ -4,17 +4,18 @@ import '../components/styles.css'
 
 function BalanceDetail(props) {
     const { totalIncome, totalExpense } = props
-
     return (
         <>
-            <div className='father'>
+        <container className='contenedor-padre'>
+            <div className='contenedor-incomes'>
                 <h3>incomes</h3>
                 <h3>Total: ${totalIncome}</h3>
             </div>
-            <div className='father'>
+            <div className='contenedor-expenses'>
                 <h3>expenses</h3>
                 <h3>Total: ${totalExpense}</h3>
             </div>
+            </container>
         </>
     )
 }

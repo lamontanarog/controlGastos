@@ -3,10 +3,28 @@
 }
 
 .footer{
-    padding: 10%;
-    margin-left: 10%;
+    padding-bottom: 10%;
 }
 
 .h1tr{
     text-align: center;
+    font-family: 'Ibarra Real Nova', serif;
+}
+
+.contenedor-padre{
+    display: flex;
+    justify-content: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.contenedor-incomes{
+    padding: 1%;
+    text-align: center;
+    color: green;
+}
+
+.contenedor-expenses{
+    padding: 1%;
+    text-align: center;
+    color: red;
 }

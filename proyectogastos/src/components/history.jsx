@@ -3,7 +3,6 @@ import HistoryItem from './historyItem';
 import '../components/styles.css'
 
 function History({transactions}) {
-
   return (
     <div className='father'>
       <h3>Historial de transacciones</h3>

@@ -18,16 +18,15 @@ function App() {
       setExpenses( (prevExpenses) => [...prevExpenses,Math.abs(transaction.costo)]);
     }
 }
+  const totalIncome = incomes.map(Number).reduce((acc, curr) => acc + curr, 0);
+  const totalExpense = expenses.map(Number).reduce((acc, curr) => acc + curr, 0);
 
-const totalIncome = incomes.map(Number).reduce((acc, curr) => acc + curr, 0);
-const totalExpense = expenses.map(Number).reduce((acc, curr) => acc + curr, 0);
-
-const totalBalance = parseFloat(totalIncome - totalExpense);
+  const totalBalance = parseFloat(totalIncome - totalExpense).toFixed(2);
 
   return (
     <>
     <Header/>
-    <Balance totalBalance={totalBalance} />
+    <Balance totalBalance={totalBalance} incomes={totalIncome} expenses={totalExpense} />
     <BalanceDetail totalIncome={totalIncome} totalExpense={totalExpense}/>
     <History transactions={transactions}/>
     <Transaction addTransaction={addTransaction}/>
