@@ -5,9 +5,7 @@ import "./styles.css"
 import React, { useContext } from 'react';
 import { ContextApp } from '../context';
 
-
-
-function Transaction(props) {
+function Transaction() {
 
     //Utilizamos el hook useContext para acceder al contexto ContextApp, del cual extraemos las funciones addTransaction y totalBalance.
     const { addTransaction, totalBalance } = useContext(ContextApp);

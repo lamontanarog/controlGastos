@@ -9,6 +9,7 @@ import { ContextApp } from './context';
 
 
 function App() {
+  
   const { totalBalance, totalIncome, totalExpense, transactions, addTransaction } = useContext(ContextApp);
 
   return (

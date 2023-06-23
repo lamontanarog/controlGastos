@@ -10,6 +10,7 @@ function HistoryItem(props) {
     <>
       <div>en: {nombreGasto}  <span> {signo} ${Math.abs(costoGasto)}  </span> </div>
     </>
+
   )
 }
 

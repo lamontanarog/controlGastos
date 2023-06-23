@@ -20,15 +20,13 @@ const ProviderApp = ({ children }) => {
         } else {
                 // Se utiliza la función Math.abs() para obtener el valor absoluto en caso de que sea un gasto negativo.
             setExpenses((prevExpenses) => [...prevExpenses, Math.abs(transaction.costo)]);
-        }
+            }
     }
     // aqui mapeamos los incomes para que cada income se convierta en un numero si hay alguno que no sea numero al 100%
     // Despues utilizamos reduce para que el valor acumulador (acc) se sume con el valor actual (curr)
     // y le decimos que inicialice en 0 (acc = 0), asi en cada iteracion del map va a ir sumando los incomes y las expenses respectivamente
     const totalIncome = incomes.map(Number).reduce((acc, curr) => acc + curr, 0);
     const totalExpense = expenses.map(Number).reduce((acc, curr) => acc + curr, 0);
-
-
     const totalBalance = parseFloat(totalIncome - totalExpense).toFixed(2);
 
     //Envolvemos el "componente" children con el contexto ContextApp.Provider, proporcionamos los estados y funciones relevantes 
