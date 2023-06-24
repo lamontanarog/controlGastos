@@ -15,7 +15,6 @@ const ProviderApp = ({ children }) => {
         setTransactions([...transactions, transaction]);
         if (transaction.costo > 0) {
             setIncomes((prevIncomes) => [...prevIncomes, transaction.costo]);
-
         } else {
                 // Se utiliza Math.abs() para obtener el valor absoluto en caso de que sea un gasto negativo.
                     setExpenses((prevExpenses) => [...prevExpenses, Math.abs(transaction.costo)]);
@@ -27,10 +26,6 @@ const ProviderApp = ({ children }) => {
     const totalIncome = incomes.map(Number).reduce((acc, curr) => acc + curr, 0);
     const totalExpense = expenses.map(Number).reduce((acc, curr) => acc + curr, 0);
     const totalBalance = parseFloat(totalIncome - totalExpense).toFixed(2);
-
-    const validarExpenses = () => {
-        
-    }
     //Envolvemos el "componente" children con el contexto ContextApp.Provider, proporcionamos los estados y funciones relevantes 
     //a través del atributo value. De esta manera, los componentes hijos que consuman este contexto tendrán acceso a ellos.
     return (

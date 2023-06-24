@@ -4,11 +4,12 @@ import { useEffect } from 'react';
 import "./styles.css"
 import React, { useContext } from 'react';
 import { ContextApp } from '../context';
+import Swal from 'sweetalert2'
+
 
 function Transaction() {
-
     //Utilizamos el hook useContext para acceder al contexto ContextApp, del cual extraemos las funciones addTransaction y totalBalance.
-    const { addTransaction, setCurrValue, totalIncome, totalBalance } = useContext(ContextApp);
+    const { addTransaction, totalBalance } = useContext(ContextApp);
     //text: guarda el valor del texto introducido en el input.
     const [text, setText] = useState("");
     //cost: guarda el valor del costo introducido en el input.
@@ -28,14 +29,17 @@ function Transaction() {
     function enviarTransaction() {
         const newTransaction = { texto: text, costo: cost };
         if (cost < 0 && Math.abs(cost) > totalBalance) {
-            alert("no posees dinero suficiente para realizar esta operacion. Intenta de nuevo al realizar un deposito")
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'No posees dinero disponible en tu cuenta!',
+                footer: '<a href="">Carga saldo para continuar con esta transaccion</a>'
+            })
         } else {
             addTransaction(newTransaction);
             setInputClear(true);
-            setCurrValue(cost);
         }
     }
-
     useEffect(() => {
         if (inputClear) {
             setText('');
@@ -54,8 +58,6 @@ function Transaction() {
                     <label htmlFor="">Amount (Negative -expense, positive - income) </label> <br />
                     <input type="number" placeholder='Enter Amount' value={cost} onChange={(e) => setCost(e.target.value)} />
                     <button type='button' onClick={enviarTransaction} disabled={isEmpty}> add transaction</button>
-
-
                 </form>
             </div>
         </>
