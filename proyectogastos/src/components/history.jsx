@@ -14,11 +14,19 @@ function History() {
 
   useEffect(()=>{
     const q = query(collection(db, 'usuarios', currentUserUid, 'transacciones'), orderBy('timestamp', 'desc'));
+    //creamos una const que contiene dentro una funcion nativa de fb que sirve para escuchar los cambios que ocurren dentro de una consulta 
+    //a la colecccion db (en este caso seria el query que inicializamos arriba)
     const unsubscribe = onSnapshot(q, (snapshot)=>{
+      //snapshot.docs actua como una lista de documentos que obtenemos de la base de datos, con el map recorremos esa lista
+      // y traemos la informacion de doc, que sera guardada en updatedTransactions y luego pasara a ser el valor de Transactions.
       const updatedTransactions = snapshot.docs.map((doc) => doc.data());
       setTransactions(updatedTransactions);
     });
+    //Una vez que dejamos de usar el componente, nos desuscribimos para evitar seguir recuperando datos innecesarios.
     return()=> unsubscribe();
+    
+    //en este useEffect tenemos como dependencia el currentUserUid, lo que quiere decir que cada vez que cambie el usuario,
+    // nuestra escucha cambiara(onSnapshot)
   },[currentUserUid]);
 
   return (

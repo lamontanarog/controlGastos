@@ -6,7 +6,6 @@ import React, { useContext } from 'react';
 import { ContextApp } from '../../Context/context';
 import Swal from 'sweetalert2'
 
-
 function Transaction() {
     //Utilizamos el hook useContext para acceder al contexto ContextApp, del cual extraemos las funciones addTransaction y totalBalance.
     const { addTransaction, totalBalance, user } = useContext(ContextApp);
@@ -17,35 +16,39 @@ function Transaction() {
     //isEmpty: indica si los campos text y cost están vacíos.
     const [isEmpty, setIsEmpty] = useState(true);
     const [inputClear, setInputClear] = useState(false);
-    //El useEffect se activa cuando los valores de text o cost cambian y actualiza el estado de isEmpty según si los campos están vacíos o no.
-    useEffect(() => {
-        setIsEmpty(text === '' || cost === '');
-    }, [text, cost]);
-    //La funcion enviarTransaction crea un nuevo objeto newTransaction con los valores de text y cost, 
-    //verifica que el cost sea menor a cero para verificar que sea un expense y que sea mayor a mi balance total
-    // para asi saber que debe mandar un mensaje de error
-    // Luego llama a la función addTransaction pasando este objeto como argumento.
-    // ademas agregamos el setInputClear y lo pasamos a true(ahora cuenta con la info de los input)
-    function enviarTransaction() {
-        const newTransaction = { texto: text, costo: cost,tipo:"" ,timestamp: new Date() };
-        if (cost > 0) {
-            newTransaction.tipo = "incomes";
-        } else if(cost < 0) {
-            newTransaction.tipo = "expenses";
-        }
+    
+
+    //Creamos una f asincronica, que empieza validando q si tenemos una expensa que supera a neustro balance total, le arroje una alerta avisandole
+    //dicho problema
+    async function enviarTransaction() {
         if(cost < 0 && Math.abs(cost) > totalBalance) {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 text: 'No posees dinero disponible en tu cuenta!',
                 footer: '<a href="">Carga saldo para continuar con esta transaccion</a>'
-            })
+            });
+            //Si no hay problema con dicha validacion creamos la nueva transaccion, pasandole los valores que van a guardarse en la db
+            //agregando un if ternario para saber que tipo de transaccion sera, y una fecha en la que dicha transaccion fue creada.
         } else {
-            addTransaction(newTransaction);
+            const newTransaction = {
+                texto: text,
+                costo: cost,
+                tipo: cost > 0 ? 'incomes' : 'expenses',
+                timestamp: new Date(),
+            };
+            // esperamos a la funcion addTransaction que viene desde el context y le pasamos como parametro nuestra newTransaction
+            await addTransaction(newTransaction);
             setInputClear(true);
             
         }
     }
+
+    //El useEffect se activa cuando los valores de text o cost cambian y actualiza el estado de isEmpty según si los campos están vacíos o no.
+    useEffect(() => {
+        setIsEmpty(text === '' || cost === '');
+    }, [text, cost]);
+
     useEffect(() => {
         if (inputClear) {
             setText('');
