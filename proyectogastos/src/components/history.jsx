@@ -2,13 +2,24 @@ import HistoryItem from './historyItem';
 import '../components/styles.css'
 import React, { useContext } from 'react';
 import { ContextApp } from '../../Context/context';
-import { onSnapshot } from 'firebase/firestore';
+import { onSnapshot, collection, query, orderBy, where } from 'firebase/firestore';
 import db from '../../firebase/firebase';
+import { useState } from 'react';
 import { useEffect } from 'react';
 
 function History() {
   // utilizamos el hook useContext para acceder al contexto ContextApp, del cual se extrae el estado transactions.
-  const { transactions, totalBalance, currValue, totalIncome } = useContext(ContextApp);
+  const { currentUserUid } = useContext(ContextApp);
+  const [transactions, setTransactions] = useState([]);
+
+  useEffect(()=>{
+    const q = query(collection(db, 'usuarios', currentUserUid, 'transacciones'), orderBy('timestamp', 'desc'));
+    const unsubscribe = onSnapshot(q, (snapshot)=>{
+      const updatedTransactions = snapshot.docs.map((doc) => doc.data());
+      setTransactions(updatedTransactions);
+    });
+    return()=> unsubscribe();
+  },[currentUserUid]);
 
   return (
     <div className='father'>

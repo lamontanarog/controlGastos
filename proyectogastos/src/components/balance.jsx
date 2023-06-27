@@ -7,8 +7,7 @@ import { ContextApp } from '../../Context/context';
 function Balance() {
   //Dentro del componente, se utiliza el hook 
   //useContext para acceder al contexto ContextApp, del cual se extraen los estados totalBalance, expenses e incomes.
-  const { totalBalance, expenses, incomes } = useContext(ContextApp);
-  //Se define un estado warningMessage utilizando el hook useState, que se inicializa como una cadena vacía.
+  const { totalBalance } = useContext(ContextApp);
 
   return (
     <>

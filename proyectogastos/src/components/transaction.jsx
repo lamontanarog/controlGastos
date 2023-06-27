@@ -27,8 +27,13 @@ function Transaction() {
     // Luego llama a la función addTransaction pasando este objeto como argumento.
     // ademas agregamos el setInputClear y lo pasamos a true(ahora cuenta con la info de los input)
     function enviarTransaction() {
-        const newTransaction = { texto: text, costo: cost };
-        if (cost < 0 && Math.abs(cost) > totalBalance) {
+        const newTransaction = { texto: text, costo: cost,tipo:"" ,timestamp: new Date() };
+        if (cost > 0) {
+            newTransaction.tipo = "incomes";
+        } else if(cost < 0) {
+            newTransaction.tipo = "expenses";
+        }
+        if(cost < 0 && Math.abs(cost) > totalBalance) {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -38,6 +43,7 @@ function Transaction() {
         } else {
             addTransaction(newTransaction);
             setInputClear(true);
+            
         }
     }
     useEffect(() => {

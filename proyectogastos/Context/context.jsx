@@ -13,11 +13,14 @@ const ProviderApp = ({ children }) => {
     const [incomes, setIncomes] = useState([]);
     const [expenses, setExpenses] = useState([]);
     const [user, setUser] = useState(null);
+    const [currentUserUid, setCurrentUserUid] = useState(null);
 
     // addTransaction se utiliza para agregar una nueva transacción al estado transactions. 
-    const addTransaction = async (transaction, usuario) => {
+    const addTransaction = async (transaction) => {
         if (auth.currentUser) {
             const usuario = auth.currentUser;
+            console.log("usuario", usuario.uid);
+            
             setTransactions([...transactions, transaction]);
             if (transaction.costo > 0) {
                 setIncomes((prevIncomes) => [...prevIncomes, transaction.costo]);
@@ -36,39 +39,24 @@ const ProviderApp = ({ children }) => {
     const totalIncome = incomes.map(Number).reduce((acc, curr) => acc + curr, 0);
     const totalExpense = expenses.map(Number).reduce((acc, curr) => acc + curr, 0);
     const totalBalance = parseFloat(totalIncome - totalExpense).toFixed(2);
+
+    useEffect(()=>{
+        onAuthStateChanged(auth,(user) =>{
+            if (user){
+                setUser(user);
+                setCurrentUserUid(user.uid);
+            }else{
+                setUser(null);
+                setCurrentUserUid(null);
+            }
+        })
+    },[])
+
     //Envolvemos el "componente" children con el contexto ContextApp.Provider, proporcionamos los estados y funciones relevantes 
     //a través del atributo value. De esta manera, los componentes hijos que consuman este contexto tendrán acceso a ellos.
 
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-            if (user) {
-                setUser(user);
-                const userTransactionsRef = collection(db, 'usuarios', user?.uid, 'transacciones');
-                const unsubscribeTransactions = onSnapshot(
-                    query(userTransactionsRef, orderBy('fecha')),
-                    (snapshot) => {
-                        const transactionList = snapshot.docs.map((doc) => ({
-                            id: doc.id,
-                            ...doc.data(),
-                        }));
-                        setTransactions(transactionList);
-                    }
-                );
-                return () => {
-                    unsubscribeTransactions();
-                };
-            } else {
-                setUser(null);
-                setTransactions([]);
-            }
-        });
-        return () => {
-            unsubscribe();
-        };
-    }, []);
-
     return (
-        <ContextApp.Provider value={{ transactions, addTransaction, totalBalance, expenses, incomes, totalIncome, totalExpense, user, setUser }}>
+        <ContextApp.Provider value={{ transactions, addTransaction, totalBalance, expenses, incomes, totalIncome, totalExpense, user, currentUserUid }}>
             {children} </ContextApp.Provider>
     )
 }
