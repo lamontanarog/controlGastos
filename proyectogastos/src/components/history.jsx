@@ -2,7 +2,7 @@
 import HistoryItem from './historyItem';
 import '../components/styles.css'
 import React, { useContext } from 'react';
-import { ContextApp } from '../context';
+import { ContextApp } from '../../Context/context';
 
 function History() {
   // utilizamos el hook useContext para acceder al contexto ContextApp, del cual se extrae el estado transactions.

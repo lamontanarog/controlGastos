@@ -1,6 +1,6 @@
 import '../components/styles.css';
 import React, { useContext } from 'react';
-import { ContextApp } from '../context';
+import { ContextApp } from '../../Context/context';
 
 function BalanceDetail() {
     const { totalIncome, totalExpense } = useContext(ContextApp);

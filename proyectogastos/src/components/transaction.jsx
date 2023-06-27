@@ -3,13 +3,13 @@ import '../components/styles.css'
 import { useEffect } from 'react';
 import "./styles.css"
 import React, { useContext } from 'react';
-import { ContextApp } from '../context';
+import { ContextApp } from '../../Context/context';
 import Swal from 'sweetalert2'
 
 
 function Transaction() {
     //Utilizamos el hook useContext para acceder al contexto ContextApp, del cual extraemos las funciones addTransaction y totalBalance.
-    const { addTransaction, totalBalance } = useContext(ContextApp);
+    const { addTransaction, totalBalance, user } = useContext(ContextApp);
     //text: guarda el valor del texto introducido en el input.
     const [text, setText] = useState("");
     //cost: guarda el valor del costo introducido en el input.
