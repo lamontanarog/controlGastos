@@ -1,62 +1,64 @@
 import React, { useState, useContext } from 'react';
-import { ContextApp } from '../../Context/context';
-import db from '../../firebase/firebase'; // Importa la instancia de Firestore que has creado
+import { useNavigate } from "react-router-dom"
+import { AuthContext } from "../../Context/AuthContext"
 
-function IniciarSesion() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const { setUser } = useContext(ContextApp);
-
-    async function handleSignIn(e) {
+function Login() {
+    const { login } = useContext(AuthContext);
+    // const { } = useContext(ContextApp);
+    const navigate = useNavigate();
+    const [user, setUser] = useState({
+        email: "",
+        password: ""
+    });
+    const handleChange = ({ target: { name, value } }) => {
+        setUser({ ...user, [name]: value })
+    }
+    const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Realizar una consulta a Firestore para obtener el documento correspondiente al correo electrónico
-            const querySnapshot = await db.collection("usuarios")
-                .where('email', '==', email)
-                .where('password', '==', password)
-                .get();
-
-            // Verificar si se encontró un documento con el correo electrónico y la contraseña proporcionados
-            if (querySnapshot.size === 1) {
-                // Obtener los datos del documento encontrado
-                const user = querySnapshot.docs[0].data();
-                // Establecer el usuario en el contexto
-                setUser(user);
-                // Limpiar los campos de entrada
-                setEmail('');
-                setPassword('');
-            } else {
-                console.log('Credenciales incorrectas');
-                // Manejar el caso en el que las credenciales sean incorrectas (mostrar mensaje de error, etc.)
+            await login(user.email, user.password);
+            navigate('/')
+        }
+        catch (error) {
+            if (error.code == "auth/user-not-found") {
+                alert("El correo no coincide con ninguno en nuestra base de datos")
             }
-        } catch (error) {
-            console.error('Error al iniciar sesión:', error);
-            // Manejar cualquier otro error que pueda ocurrir
+            if (error.code == "auth/invalid-email") {
+                alert("correo invalido")
+            }
+            if(error.code == "auth/weak-password"){
+                alert("La contrase;a es demasiado corta, recuerda que deben ser al menos 6(seis) caracteres")
+            }
+            if(error.code == "auth/wrong-password"){
+                alert("contrase;a incorrecta, intentalo de nuevo")
+            }
+            console.log(error.code)
         }
     }
 
     return (
         <div>
-            <h2>Iniciar sesión</h2>
-            <form onSubmit={handleSignIn}>
+            <h2>Iniciar Sesion</h2>
+            <form onSubmit={handleSubmit}>
                 <label>Email:</label>
                 <input
                     type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
+                    name='email'
+                    placeholder='youremail@gmail.com'
+                    onChange={handleChange}
                 />
                 <label>Password:</label>
                 <input
                     type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    name='password'
+                    placeholder='password'
+                    onChange={handleChange}
                     required
                 />
-                <button type="submit">Iniciar sesión</button>
+                <button type="submit">Iniciar sesion</button>
             </form>
         </div>
     );
 }
 
-export default IniciarSesion;
+export default Login;

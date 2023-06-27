@@ -7,15 +7,20 @@ import ProviderApp from "../Context/context";
 import { useContext } from "react";
 import { ContextApp } from "../Context/context";
 import CrearCuenta from "./components/SignIn";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import IniciarSesion from "./components/inicio";
-import { AuthContext, AuthProvider } from "../Context/AuthContext";
+import { AuthContext } from "../Context/AuthContext";
+import AuthProvider from "../Context/AuthContext";
 
 function App() {
-  const BaseApp = () => {
-    const {totalBalance,totalIncome,totalExpense,transactions,addTransaction} = useContext(ContextApp);
-    return (
-      <ProviderApp>
+const navigate = useNavigate()
+  const { loginOut} = useContext(AuthContext);
+  const { totalBalance, totalIncome, totalExpense, transactions, addTransaction } = useContext(ContextApp);
+  
+const BaseApp = () => {
+  return (
+        <>
+        <button onClick={()=>{loginOut();navigate("/Login");alert("Sesion cerrada correctamente")}} >Sign Out</button>
         <Header />
         <Balance
           totalBalance={totalBalance}
@@ -23,26 +28,23 @@ function App() {
           expenses={totalExpense} />
         <BalanceDetail totalIncome={totalIncome} totalExpense={totalExpense} />
         <History transactions={transactions} />
-        <Transaction addTransaction={addTransaction} />
-      </ProviderApp>
-    );
-  };
+        <Transaction addTransaction={addTransaction} /></>
+  );
+};
 
   return (
-    <>
-      { 
-      <AuthProvider>
-        <Routes>
-          !user ?
-          <Route path="/CreateAcount" element={<CrearCuenta />} />
-          <Route path="/Login" element={<IniciarSesion />} />
-          : <Route path="/" element={BaseApp()} />;
-        </Routes>
-        </AuthProvider>
-      }
-      
-    </>
+    <AuthProvider>
+      <ProviderApp>
+      <Routes>
+        <Route path="/CreateAcount" element={<CrearCuenta />} />
+        <Route path="/Login" element={<IniciarSesion />} />
+        <Route path="/" element={<BaseApp />} />;
+      </Routes>
+      </ProviderApp>
+      </AuthProvider>
   );
+
 }
+
 
 export default App;

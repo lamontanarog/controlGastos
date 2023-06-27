@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import {getFirestore,addDoc,collection} from "firebase/firestore";
+import { getFirestore, addDoc, collection } from "firebase/firestore";
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
@@ -18,12 +18,11 @@ export default db;
 export const auth = getAuth(app);
 
 
-// export async function CreateUser(usuarios) {
-//     const collectionRef = collection(db, "usuarios");
+export async function CreateUser(usuarios) {
+    const collectionRef = collection(db, "usuarios");
 
-//     console.log(usuarios);
+    console.log(usuarios);
 
-//     const response = await addDoc(collectionRef, usuarios);
-//     console.log("usuario creado correctamente", response.id);
-// }
+    const response = await addDoc(collectionRef, usuarios);
+    console.log("usuario creado correctamente", response.id);  }
 

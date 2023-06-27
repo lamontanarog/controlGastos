@@ -10,14 +10,26 @@ function CrearCuenta() {
         email: "",
         password: ""
     });
-
     const handleChange = ({ target: { name, value } }) => {
         setUser({ ...user, [name]: value })
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if(signUp){
-            signUp(user.email, user.password)
+        try {
+            await signUp(user.email, user.password);
+            navigate('/')
+        }
+        catch (error) {
+            if (error.code == "auth/email-already-in-use") {
+                alert("Correo actualmente en uso")
+            }
+            if (error.code == "auth/invalid-email") {
+                alert("correo invalido")
+            }
+            if(error.code == "auth/weak-password"){
+                alert("La contrase;a es demasiado corta, recuerda que deben ser al menos 6(seis) caracteres")
+            }
+            console.log(error.code)
         }
     }
 
@@ -42,7 +54,7 @@ function CrearCuenta() {
                 />
                 <button type="submit">Crear usuario</button>
             </form>
-            <button onClick={()=>{navigate("/Login")}}>Iniciar Sesion</button>
+            <button onClick={() => { navigate("/Login") }}>Iniciar Sesion</button>
         </div>
     );
 }
