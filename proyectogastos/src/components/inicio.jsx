@@ -17,7 +17,7 @@ function Login() {
         e.preventDefault();
         try {
             await login(user.email, user.password);
-            navigate('/')
+            navigate('/home')
         }
         catch (error) {
             if (error.code == "auth/user-not-found") {

@@ -17,7 +17,7 @@ function CrearCuenta() {
         e.preventDefault();
         try {
             await signUp(user.email, user.password);
-            navigate('/')
+            navigate('/home')
         }
         catch (error) {
             if (error.code == "auth/email-already-in-use") {
@@ -54,7 +54,7 @@ function CrearCuenta() {
                 />
                 <button type="submit">Crear usuario</button>
             </form>
-            <button onClick={() => { navigate("/Login") }}>Iniciar Sesion</button>
+            <button onClick={() => { navigate("/") }}>Iniciar Sesion</button>
         </div>
     );
 }

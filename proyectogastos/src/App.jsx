@@ -20,7 +20,7 @@ const navigate = useNavigate();
 const BaseApp = () => {
   return (
         <>
-        <button onClick={()=>{loginOut();navigate("/Login");alert("Sesion cerrada correctamente")}} >Sign Out</button>
+        <button onClick={()=>{loginOut();navigate("/");alert("Sesion cerrada correctamente")}} >Sign Out</button>
         <Header />
         <Balance
           totalBalance={totalBalance}
@@ -37,8 +37,8 @@ const BaseApp = () => {
       <ProviderApp>
       <Routes>
         <Route path="/CreateAcount" element={<CrearCuenta />} />
-        <Route path="/Login" element={<IniciarSesion />} />
-        <Route path="/" element={<BaseApp />} />;
+        <Route path="/" element={<IniciarSesion />} />
+        <Route path="/home" element={<BaseApp />} />;
       </Routes>
       </ProviderApp>
       </AuthProvider>
