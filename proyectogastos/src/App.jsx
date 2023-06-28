@@ -13,7 +13,7 @@ import { AuthContext } from "../Context/AuthContext";
 import AuthProvider from "../Context/AuthContext";
 
 function App() {
-const navigate = useNavigate()
+const navigate = useNavigate();
   const { loginOut} = useContext(AuthContext);
   const { totalBalance, totalIncome, totalExpense, transactions, addTransaction } = useContext(ContextApp);
   

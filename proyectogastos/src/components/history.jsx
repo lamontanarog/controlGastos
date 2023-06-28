@@ -35,9 +35,7 @@ function History() {
       {/* realizamos una verificación de que transactions exista (no sea nulo), si existe hace un mapeo de cada elemento dentro de transacctions */}
       <ul>
         {transactions && transactions.map((transaccion, index) => (
-
             <HistoryItem key={index} nombreGasto={transaccion.texto} costoGasto={transaccion.costo} />
-
         ))}
       </ul>
     </div>

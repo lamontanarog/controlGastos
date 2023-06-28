@@ -46,7 +46,6 @@ const ProviderApp = ({ children }) => {
         setUserIncomes(incomes);
         setUserExpenses(expenses);
     };
-
     // addTransaction se utiliza para agregar una nueva transacción al estado transactions. 
     const addTransaction = async (transaction) => {
         if (auth.currentUser) {
@@ -59,7 +58,6 @@ const ProviderApp = ({ children }) => {
             console.error('Usuario no valido');
         }
     };
-    
         useEffect(()=>{
             onAuthStateChanged(auth,(user) =>{
                 if (user){
@@ -75,7 +73,6 @@ const ProviderApp = ({ children }) => {
                 }
             });
         },[]);
-
     // aqui mapeamos los incomes para que cada income se convierta en un numero si hay alguno que no sea numero al 100%
     // Despues utilizamos reduce para que el valor acumulador (acc) se sume con el valor actual (curr)
     // y le decimos que inicialice en 0 (acc = 0), asi en cada iteracion del map va a ir sumando los incomes y las expenses respectivamente
