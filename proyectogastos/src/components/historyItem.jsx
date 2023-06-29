@@ -8,7 +8,7 @@ function HistoryItem(props) {
   
   return (
     <>
-      <div>en: {nombreGasto}  <span> {signo} ${Math.abs(costoGasto)}  </span> </div>
+      <div className='itemsHistorial'> ◒ <span> {signo} ${Math.abs(costoGasto)}  </span> en {nombreGasto}  </div>
     </>
   )
 }

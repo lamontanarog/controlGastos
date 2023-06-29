@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import '../components/styles.css'
 import { useEffect } from 'react';
-import "./styles.css"
 import React, { useContext } from 'react';
 import { ContextApp } from '../../Context/context';
 import Swal from 'sweetalert2'
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+
 
 function Transaction() {
     //Utilizamos el hook useContext para acceder al contexto ContextApp, del cual extraemos las funciones addTransaction y totalBalance.
@@ -59,16 +61,25 @@ function Transaction() {
 
     return (
         <>
-            <div>
-                <h1 className='h1tr'>Add new transaction</h1>
-                <form className='footer'>
-                    <label htmlFor="">Texto</label> <br />
-                    <input type="text" placeholder='Enter text' value={text} onChange={(e) => setText(e.target.value)} /> <br />
-                    <label htmlFor="">Amount (Negative -expense, positive - income) </label> <br />
-                    <input type="number" placeholder='Enter Amount' value={cost} onChange={(e) => setCost(e.target.value)} />
-                    <button type='button' onClick={enviarTransaction} disabled={isEmpty}> add transaction</button>
-                </form>
-            </div>
+        <div className='column-1'>
+        <Form>
+                <Form.Group className="mb-3">
+                    <Form.Label>Texto</Form.Label>
+                    <Form.Control type="text" value={text} placeholder="Enter text" onChange={(e) => setText(e.target.value)} />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                <Form.Text className="text-muted">
+                Amount (Negative -expense, positive - income)
+                    </Form.Text>
+                    <br />
+                    <Form.Label>Monto</Form.Label>
+                    <Form.Control type="number" value={cost} placeholder="enter amount" onChange={(e) => setCost(e.target.value)} />
+                </Form.Group>
+                <Button  variant="primary" onClick={enviarTransaction} disabled={isEmpty}>
+                    Agregar transaccion
+                </Button>
+            </Form>
+                    </div>
         </>
     )
 }

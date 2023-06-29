@@ -8,11 +8,11 @@ function BalanceDetail() {
         <>
             <div className='contenedor-padre'>
                 <div className='contenedor-incomes'>
-                    <h3>incomes</h3>
+                    <h3>Ingresos</h3>
                     <h3>Total: ${totalIncome}</h3>
                 </div>
                 <div className='contenedor-expenses'>
-                    <h3>expenses</h3>
+                    <h3>Egresos</h3>
                     <h3>Total: ${totalExpense}</h3>
                 </div>
             </div>

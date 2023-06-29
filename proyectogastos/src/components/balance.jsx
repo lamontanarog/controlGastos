@@ -11,8 +11,8 @@ function Balance() {
 
   return (
     <>
-      <h1>Your balance</h1>
-      <h2>{totalBalance}</h2>
+      <h1 className='h1tr'>Tu balance</h1>
+      <h2 className='h1tr'>{totalBalance}</h2>
     </>
   )
 }
