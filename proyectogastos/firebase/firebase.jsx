@@ -4,11 +4,11 @@ import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
     apiKey: "AIzaSyBo35Y32VfPIsjFqffPzoD-lrumSnmpHFc",
-    authDomain: "controldegastos-9f556.firebaseapp.com",
+    authDomain: "process.env.REACT_APP_FIREBASE_AUTH_DOMAIN",
     projectId: "controldegastos-9f556",
     storageBucket: "controldegastos-9f556.appspot.com",
-    messagingSenderId: "1073071462510",
-    appId: "1:1073071462510:web:6758e674bcbcbc4a46ae7f"
+    messagingSenderId: "process.env.REACT_APP_FIREBASE_MSG_ID",
+    appId:"process.env.REACT_APP_FIREBASE_APP_ID"
 };
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
