@@ -15,6 +15,9 @@ function CrearCuenta() {
         password: ""
     });
 
+    // creamos una funcion handle change que va a traer los cambios en los imputs,la cual tiene como parametros
+    // la destructuracion del objeto target, que trae los propiedades name(email, password) y el value que escribimos en el input
+    // luego setea al usuario con un spritOperator y dependiendo el name va a llenar ese valor 
     const handleChange = ({ target: { name, value } }) => {
         setUser({ ...user, [name]: value })
     }
@@ -44,7 +47,7 @@ function CrearCuenta() {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'La contrase;a es demasiado corta, recuerda que deben ser al menos 6(seis) caracteres.'
+                    text: 'La contraseña es demasiado corta, recuerda que deben ser al menos 6(seis) caracteres.'
                 });
             }
             console.log(error.code)

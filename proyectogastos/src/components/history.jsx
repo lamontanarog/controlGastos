@@ -2,7 +2,7 @@ import HistoryItem from './historyItem';
 import '../components/styles.css'
 import React, { useContext } from 'react';
 import { ContextApp } from '../../Context/context';
-import { onSnapshot, collection, query, orderBy, where } from 'firebase/firestore';
+import { onSnapshot, collection, query, orderBy } from 'firebase/firestore';
 import db from '../../firebase/firebase';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -16,7 +16,7 @@ function History() {
     const q = query(collection(db, 'usuarios', currentUserUid, 'transacciones'), orderBy('timestamp', 'desc'));
     //creamos una const que contiene dentro una funcion nativa de fb que sirve para escuchar los cambios que ocurren dentro de una consulta 
     //a la colecccion db (en este caso seria el query que inicializamos arriba)
-    const unsubscribe = onSnapshot(q, (snapshot) => {
+    const unsubscribe = onSnapshot(q, (snapshot) => { 
       //snapshot.docs actua como una lista de documentos que obtenemos de la base de datos, con el map recorremos esa lista
       // y traemos la informacion de doc, que sera guardada en updatedTransactions y luego pasara a ser el valor de Transactions.
       const updatedTransactions = snapshot.docs.map((doc) => doc.data());

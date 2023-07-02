@@ -7,8 +7,7 @@ import CrearCuenta from "./components/register";
 import IniciarSesion from "./components/login";
 import ProviderApp from "../Context/context";
 import { useContext } from "react";
-import { ContextApp } from "../Context/context";
-import { Routes, Route, useNavigate, Outlet } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 import AuthProvider from "../Context/AuthContext";
 import "./components/styles.css"
@@ -18,8 +17,6 @@ import Swal from 'sweetalert2'
 function App() {
   const navigate = useNavigate();
   const { loginOut } = useContext(AuthContext);
-  const { totalBalance, totalIncome, totalExpense, transactions, addTransaction } = useContext(ContextApp);
-
   const BaseApp = () => {
     return (
       <>
@@ -29,14 +26,11 @@ function App() {
                     text: 'Sesion cerrada correctamente.'
                 }); }}>cerrar sesion</Button>
         <Header />
-        <Balance
-          totalBalance={totalBalance}
-          incomes={totalIncome}
-          expenses={totalExpense} />
-        <BalanceDetail totalIncome={totalIncome} totalExpense={totalExpense} />
+        <Balance />
+        <BalanceDetail />
         <div className="grilla">
-          <History transactions={transactions} />
-          <Transaction addTransaction={addTransaction} />
+          <History />
+          <Transaction />
         </div>
       </>
     );
@@ -52,8 +46,5 @@ function App() {
       </ProviderApp>
     </AuthProvider>
   );
-
 }
-
-
 export default App;

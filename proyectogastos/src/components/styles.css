@@ -74,6 +74,9 @@
 .buttonsFormLogin{
     margin-left: 30%;
 }
+.buttonsFormTransferencia{
+    margin-left: 23%;
+}
 .btnInicio {
     margin: 2%;
 }
@@ -100,6 +103,7 @@
 .grillaUser {
     display: flex;
     padding: 5%;
+    margin-left: 5%;
     margin-top: 5%;
 }
 
@@ -158,5 +162,13 @@
         display: flex;
         padding: 3.4%;
         margin-top: 3%;
+    }
+}
+
+@media only screen and (min-width: 1500px) and (max-width: 1800px) {
+    .grillaUser {
+        display: flex;
+        padding: 3.4%;
+        margin-top: 5%;
     }
 }

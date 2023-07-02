@@ -4,7 +4,7 @@ import '../components/styles.css'
 function HistoryItem(props) {
 
   const { nombreGasto, costoGasto } = props;
-  const signo = costoGasto < 0 ? 'Gastaste -' : 'Ganaste +';
+  const signo = costoGasto < 0 ? 'Gastaste -' : 'Recibiste +';
   
   return (
     <>

@@ -8,12 +8,12 @@ import "./styles.css"
 
 function Login() {
     const { login } = useContext(AuthContext);
-    // const { } = useContext(ContextApp);
     const navigate = useNavigate();
     const [user, setUser] = useState({
         email: "",
         password: ""
     });
+
     const handleChange = ({ target: { name, value } }) => {
         setUser({ ...user, [name]: value })
     }
@@ -42,14 +42,14 @@ function Login() {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'La contrase;a es demasiado corta, recuerda que deben ser al menos 6(seis) caracteres.'
+                    text: 'La contraseña es demasiado corta, recuerda que deben ser al menos 6(seis) caracteres.'
                 });
             }
             if (error.code == "auth/wrong-password") {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'contrase;a incorrecta, intentalo de nuevo.'
+                    text: 'contraseña incorrecta, intentalo de nuevo.'
                 });
             }
             console.log(error.code)
@@ -76,7 +76,7 @@ function Login() {
                 <Button className='btnInicio' variant="primary" type="submit">
                     iniciar sesion
                 </Button>
-                <Button className='btnInicio' variant="primary" type="submit" onClick={() =>{navigate('/CreateAcount')}}>
+                <Button className='btnInicio' variant="primary" type="button" onClick={() =>{navigate('/CreateAcount')}}>
                     crear cuenta
                 </Button>
                 </div>

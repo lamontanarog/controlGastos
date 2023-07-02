@@ -6,6 +6,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 //El contexto ContextApp se crea utilizando createContext() de React
 // y se exporta para que pueda ser utilizado por los otros componentes.
 export const ContextApp = createContext();
+
 const ProviderApp = ({ children }) => {
     //Este va a ser un componente funcional que recibe como props a children que va a
     //representar los componentes hijos que van a ser envueltos por el context.
@@ -58,6 +59,7 @@ const ProviderApp = ({ children }) => {
             console.error('Usuario no valido');
         }
     };
+    
         useEffect(()=>{
             onAuthStateChanged(auth,(user) =>{
                 if (user){
