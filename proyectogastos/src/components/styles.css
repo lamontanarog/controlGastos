@@ -160,3 +160,11 @@
         margin-top: 3%;
     }
 }
+
+@media only screen and (min-width: 1500px) and (max-width: 1800px) {
+    .grillaUser {
+        display: flex;
+        padding: 3.4%;
+        margin-top: 5%;
+    }
+}
