@@ -18,12 +18,12 @@ function Transaction() {
     //isEmpty: indica si los campos text y cost están vacíos.
     const [isEmpty, setIsEmpty] = useState(true);
     const [inputClear, setInputClear] = useState(false);
-    
+
 
     //Creamos una f asincronica, que empieza validando q si tenemos una expensa que supera a neustro balance total, le arroje una alerta avisandole
     //dicho problema
     async function enviarTransaction() {
-        if(cost < 0 && Math.abs(cost) > totalBalance) {
+        if (cost < 0 && Math.abs(cost) > totalBalance) {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -42,7 +42,7 @@ function Transaction() {
             // esperamos a la funcion addTransaction que viene desde el context y le pasamos como parametro nuestra newTransaction
             await addTransaction(newTransaction);
             setInputClear(true);
-            
+
         }
     }
 
@@ -61,25 +61,24 @@ function Transaction() {
 
     return (
         <>
-        <div className='column-1'>
-        <Form>
-                <Form.Group className="mb-3">
-                    <Form.Label>Texto</Form.Label>
-                    <Form.Control type="text" value={text} placeholder="Enter text" onChange={(e) => setText(e.target.value)} />
-                </Form.Group>
-                <Form.Group className="mb-3">
-                <Form.Text className="text-muted">
-                Amount (Negative -expense, positive - income)
-                    </Form.Text>
-                    <br />
-                    <Form.Label>Monto</Form.Label>
-                    <Form.Control type="number" value={cost} placeholder="enter amount" onChange={(e) => setCost(e.target.value)} />
-                </Form.Group>
-                <Button  variant="primary" onClick={enviarTransaction} disabled={isEmpty}>
-                    Agregar transaccion
-                </Button>
-            </Form>
-                    </div>
+            <div className='column-1'>
+                <Form>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Detalle transacción</Form.Label>
+                        <Form.Control type="text" value={text} placeholder="Detalle transacción" onChange={(e) => setText(e.target.value)} />
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <div className="texto-muteado-form">
+                            Monto (Negativo -Gasto, Positivo - Ingreso)
+                        </div>
+                        <Form.Label>Monto transacción</Form.Label>
+                        <Form.Control type="number" value={cost} placeholder="Monto" onChange={(e) => setCost(e.target.value)} />
+                    </Form.Group>
+                    <Button variant="primary" onClick={enviarTransaction} disabled={isEmpty}>
+                        Agregar transaccion
+                    </Button>
+                </Form>
+            </div>
         </>
     )
 }

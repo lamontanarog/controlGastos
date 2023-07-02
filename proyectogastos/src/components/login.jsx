@@ -57,27 +57,31 @@ function Login() {
     }
 
     return (
-        <div className='pruebaEstilo'>
+        <div className='grillaUser'>
+        <div className='column-picture-login'></div>
+        <div className='column-form'>
             <Form  onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" name='email' placeholder="Enter email" onChange={handleChange} />
-                    <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
-                    </Form.Text>
+                    <Form.Label>Correo electronico</Form.Label>
+                    <Form.Control type="email" name='email' placeholder="Ingrese su correo" onChange={handleChange} />
+                    <div className="texto-muteado-form">
+                        Nunca compartiremos tu informacion con nadie.
+                    </div>
                 </Form.Group>
-
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" name='password' placeholder="Password" onChange={handleChange} />
+                    <Form.Label>Contraseña</Form.Label>
+                    <Form.Control type="password" name='password' placeholder="Ingrese su contraseña" onChange={handleChange} />
                 </Form.Group>
+                <div className='buttonsFormLogin'>
                 <Button className='btnInicio' variant="primary" type="submit">
                     iniciar sesion
                 </Button>
                 <Button className='btnInicio' variant="primary" type="submit" onClick={() =>{navigate('/CreateAcount')}}>
                     crear cuenta
                 </Button>
+                </div>
             </Form>
+        </div>
         </div>
     );
 }

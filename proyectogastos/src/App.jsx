@@ -8,7 +8,7 @@ import IniciarSesion from "./components/login";
 import ProviderApp from "../Context/context";
 import { useContext } from "react";
 import { ContextApp } from "../Context/context";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, Outlet } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 import AuthProvider from "../Context/AuthContext";
 import "./components/styles.css"
@@ -41,14 +41,13 @@ function App() {
       </>
     );
   };
-
   return (
     <AuthProvider>
       <ProviderApp>
         <Routes>
+          <Route path="/home" element={<BaseApp />} />
           <Route path="/CreateAcount" element={<CrearCuenta />} />
           <Route path="/" element={<IniciarSesion />} />
-          <Route path="/home" element={<BaseApp />} />;
         </Routes>
       </ProviderApp>
     </AuthProvider>

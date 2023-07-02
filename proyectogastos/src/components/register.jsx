@@ -52,23 +52,31 @@ function CrearCuenta() {
     }
 
     return (
-        <div className='pruebaEstilo'>
+        <div className='grillaUser'>
+        <div className='column-picture-register'><h1 className='contenido-parallax-register'>Crea una cuenta gratis</h1></div>
+        <div className='column-form'>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" name='email' placeholder="Enter email" onChange={handleChange} required />
-                    <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
-                    </Form.Text>
+                    <Form.Label>Correo electronico</Form.Label>
+                    <Form.Control type="email" name='email' placeholder="Ingresa tu correo" onChange={handleChange} required />
+                    <div className="texto-muteado-form">
+                        Nunca compartiremos tu informacion con nadie.
+                    </div>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" name='password' placeholder="Password" onChange={handleChange} required />
+                    <Form.Label>Contraseña</Form.Label>
+                    <Form.Control type="password" name='password' placeholder="Ingresa tu contraseña" onChange={handleChange} required />
                 </Form.Group>
+                <div className='buttonsForm'>
+                <Button className='btnInicio' variant="primary" type="button" onClick={() =>{navigate('/')}}>
+                    Iniciar sesion
+                </Button>
                 <Button variant="primary" type="submit">
                     crear cuenta
                 </Button>
+                </div>
             </Form>
+        </div>
         </div>
     );
 }
