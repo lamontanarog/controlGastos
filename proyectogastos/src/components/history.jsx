@@ -1,11 +1,9 @@
 import HistoryItem from './historyItem';
 import '../components/styles.css'
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { ContextApp } from '../../Context/context';
 import { onSnapshot, collection, query, orderBy } from 'firebase/firestore';
 import db from '../../firebase/firebase';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 function History() {
   // utilizamos el hook useContext para acceder al contexto ContextApp, del cual se extrae el estado transactions.

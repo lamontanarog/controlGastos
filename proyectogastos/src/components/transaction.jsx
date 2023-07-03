@@ -1,7 +1,5 @@
-import { useState } from 'react'
 import '../components/styles.css'
-import { useEffect } from 'react';
-import React, { useContext } from 'react';
+import React, { useContext,useEffect, useState } from 'react';
 import { ContextApp } from '../../Context/context';
 import Swal from 'sweetalert2'
 import Button from 'react-bootstrap/Button';

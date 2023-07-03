@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import '../components/styles.css';
 import React, { useContext } from 'react';
 import { ContextApp } from '../../Context/context';
